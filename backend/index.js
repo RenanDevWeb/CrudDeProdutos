@@ -22,9 +22,9 @@ App.get('/produtos',(req,resp)=> {
     
 
     connection.query(query,(err, data) => {
-        if(err) return  resp.json(error)
+        if(err) return  resp.status(404).json(error)
          
-        return resp.json(data)
+        return resp.status(200).json(data)
     })
 
 })
@@ -41,9 +41,9 @@ App.post("/produtos", (req, resp) => {
     ]
     
     connection.query(query,[values],(err,data) => {
-        if(err) return resp.send(err)
+        if(err) return resp.status(404).send(err)
 
-        return resp.json(data)
+        return resp.status(201).json(data)
     })
 } )
 
@@ -63,8 +63,8 @@ App.put('/produtos/:id', (req,resp)=>{
     ]
 
      connection.query(query,[...values,codigoProduto],(err,data)=> {
-        if(err) return resp.json(err)
-        return resp.json(data)
+        if(err) return resp.status(404).json(err)
+        return resp.status(200).json(data)
      })
 
 })
@@ -77,8 +77,8 @@ App.delete('/produtos/:id', (req,resp)=>{
   const query = "DELETE FROM produtos WHERE codigoProduto = ?"
    
   connection.query(query,[produtoCodigo],(err,data)=>{
-    if(err) return resp.send(err)
-    return resp.json(data)
+    if(err) return resp.status(404).send(err)
+    return resp.status(2000).json(data)
   })
 
 
