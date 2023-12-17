@@ -48,7 +48,41 @@ App.post("/produtos", (req, resp) => {
 } )
 
 
+// rota de atualização 
+App.put('/produtos/:id', (req,resp)=>{
+    const codigoProduto = req.params.id
+    const data = req.body
+ 
 
+    const query = "UPDATE produtos SET `codigoProduto` = ?,`nome` = ?,`descrisao` = ?,`preco` = ? WHERE codigoProduto =  ? "
+    const values = [
+        data.codigoProduto,
+        data.nome,
+        data.descrisao,
+        data.preco
+    ]
+
+     connection.query(query,[...values,codigoProduto],(err,data)=> {
+        if(err) return resp.json(err)
+        return resp.json(data)
+     })
+
+})
+
+
+// rota de deletar 
+App.delete('/produtos/:id', (req,resp)=>{
+  const produtoCodigo = req.params.id
+  console.log(produtoCodigo);
+  const query = "DELETE FROM produtos WHERE codigoProduto = ?"
+   
+  connection.query(query,[produtoCodigo],(err,data)=>{
+    if(err) return resp.send(err)
+    return resp.json(data)
+  })
+
+
+})
 
 
 
