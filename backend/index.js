@@ -19,14 +19,11 @@ App.get("/",(req,resp)=>{
 //pega todos os produtos do banco 
 App.get('/produtos',(req,resp)=> {
     const query = "SELECT * FROM produtos"
-    
-
     connection.query(query,(err, data) => {
         if(err) return  resp.status(404).json(error)
          
         return resp.status(200).json(data)
     })
-
 })
 
 // inseri produtos no banco 
