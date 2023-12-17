@@ -2,7 +2,7 @@ import mysql2 from 'mysql2'
 import dotenv from 'dotenv'
 dotenv.config()
 
-console.log(process.env.LOCALHOST)
+
 
 // cria conexao com o banco de dados 
 export const connection = mysql2.createConnection({
