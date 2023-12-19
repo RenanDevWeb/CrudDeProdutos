@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import {connection} from './database/database.js'
 const App = express()
 const PORT = 3000
@@ -9,20 +10,30 @@ const PORT = 3000
 App.use(express.json());
 App.use(bodyParser.json())
 App.use(bodyParser.urlencoded({extended: true}))
+App.use(cors())
 
 
 //rota principal da aplicação 
 App.get("/",(req,resp)=>{
-   resp.send({message: "por aqui tudo ok"})
+  const query = "SELECT COUNT(*) as total FROM produtos"
+  connection.query(query,(err,data) => {
+    if(err) return  resp.status(404).json(error)
+         
+    return resp.status(200).json(data)
+  })
+
+ 
 })
 
 //pega todos os produtos do banco 
 App.get('/produtos',(req,resp)=> {
-    const query = "SELECT * FROM produtos"
+    const query = "SELECT *  FROM produtos"
+
     connection.query(query,(err, data) => {
         if(err) return  resp.status(404).json(error)
          
         return resp.status(200).json(data)
+
     })
 })
 
@@ -49,7 +60,7 @@ App.post("/produtos", (req, resp) => {
 App.put('/produtos/:id', (req,resp)=>{
     const codigoProduto = req.params.id
     const data = req.body
- 
+     
 
     const query = "UPDATE produtos SET `codigoProduto` = ?,`nome` = ?,`descrisao` = ?,`preco` = ? WHERE codigoProduto =  ? "
     const values = [
@@ -75,7 +86,7 @@ App.delete('/produtos/:id', (req,resp)=>{
    
   connection.query(query,[produtoCodigo],(err,data)=>{
     if(err) return resp.status(404).send(err)
-    return resp.status(2000).json(data)
+    return resp.status(200).json(data)
   })
 
 
