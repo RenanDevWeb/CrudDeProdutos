@@ -37,6 +37,17 @@ App.get('/produtos',(req,resp)=> {
     })
 })
 
+
+App.get('/produtos/:id',(req,resp)=> {
+  const query = "SELECT * FROM produtos WHERE codigoProduto = (?)"
+  const codigoProduto = req.params.id
+   connection.query(query,[codigoProduto],(err,data)=> {
+    if(err) return resp.status(404).send(err)
+    
+    return resp.status(200).json(data)
+   })
+})
+
 // inseri produtos no banco 
 App.post("/produtos", (req, resp) => {
     const data  = req.body

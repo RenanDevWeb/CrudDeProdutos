@@ -27,8 +27,6 @@ export default function Produtos() {
 
 
     return (
-  
- 
       <div className='produtos'>
       <table>
         <thead>
@@ -41,8 +39,8 @@ export default function Produtos() {
         </thead>
         <tbody>
           {produtos.map(product => (
-            <tr key={product.codigoProduto}>
-              <td>{product.codigoProduto}</td>
+            <tr >
+              <td key={product.codigoProduto} >{product.codigoProduto}</td>
               <td>{product.nome}</td>
               <td>{product.descrisao}</td>
               <td>R$ {product.preco.toFixed(2)}</td>

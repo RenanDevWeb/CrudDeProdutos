@@ -1,7 +1,8 @@
 import Home from '../pages/home/home'
 import Produtos from "../pages/produtos/produtos";
-import AddProduto from "../pages/addProduto";
-import UpdateProduto from "../pages/updateProduto";
+import AddProduto from "../pages/addProduto/addProduto";
+import UpdateProduto from "../pages/update/index";
+import VerProduto  from '../pages/visualizarProdutos/index'
 import {
   BrowserRouter,
   Routes,
@@ -21,8 +22,9 @@ function App() {
     <Routes>
             <Route path="/" element={<Home />} /> 
             <Route exact path="/produtos" element={<Produtos />} />
-            <Route exact path="/add" element={<AddProduto />} />
-            <Route exact path="/update" element={< UpdateProduto/>} />
+            <Route exact path="/add_new" element={<AddProduto />} />
+            <Route exact path="/update/:id" element={< UpdateProduto/>} />
+            <Route exact path="/visualizar/:id" element={< VerProduto/>} />
             
       </Routes>
     </BrowserRouter>

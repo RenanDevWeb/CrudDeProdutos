@@ -9,10 +9,6 @@ export default function index({total}) {
   console.log(total);
 
   return (
-
-    
-
-
     <Card className="bg-dark text-white m-2 p-2" >
       <Card.Title>Quantidade de Produtos</Card.Title>
       <div className='d-flex justify-content-between'>
